@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  unrevil:
+    image: postgres
+    container_name: unrevil
+    restart: always
+    ports:
+      - '5439:5432'
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: unrevil
+    volumes:
+      - unrevil:/var/lib/postgresql/data
+
+  unrevil_app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: unrevil_app_container
+    restart: always
+    ports:
+      - '5000:3000'
+    depends_on:
+      - unrevil
+    volumes:
+      - ./:/app
+
+volumes:
+  unrevil:
