@@ -35,11 +35,4 @@ export class usersEntity extends baseEntity {
     @ManyToOne(() => rolesEntity, (role) => role.users)
     role: rolesEntity
 
-
-
-
-
-
-
-
 }
